@@ -1,0 +1,27 @@
+.detailsContainer {
+  display: flex;
+  gap: 25px;
+}
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.detPar {
+  width: 500px;
+}
+
+.castAndReview {
+  display: flex;
+  gap: 10px;
+}
+a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #0056b3;
+}

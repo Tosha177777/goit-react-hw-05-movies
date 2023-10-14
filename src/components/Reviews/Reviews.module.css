@@ -1,0 +1,7 @@
+.reviewsList {
+  list-style: none;
+}
+
+.reviewsContent {
+  max-width: 900px;
+}
