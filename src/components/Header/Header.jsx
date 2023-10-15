@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import { ColorRing } from 'react-loader-spinner';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const Header = () => {
@@ -9,7 +11,9 @@ const Header = () => {
           <NavLink to="/movies">Movies</NavLink>
         </nav>
       </header>
-      <Outlet />
+      <Suspense fallback={<ColorRing visible={true} />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

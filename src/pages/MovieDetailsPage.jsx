@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchAllMovies = async () => {
@@ -14,7 +14,6 @@ const MovieDetailsPage = () => {
       try {
         const dataMovies = await fetchMovies(`movie/${movieId}`);
         setMovie(dataMovies);
-        console.log(dataMovies.backdrop_path); //ошибка при подгрузке изображения на странице детальной информации "backdrop_path"
       } catch (error) {
         console.error(error);
       } finally {
@@ -26,11 +25,9 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <ColorRing visible={isLoading} />
-      ) : (
-        <MovieDetails movie={movie} />
-      )}
+      {isLoading && <ColorRing visible={isLoading} />}
+
+      {movie && <MovieDetails movie={movie} />}
     </div>
   );
 };

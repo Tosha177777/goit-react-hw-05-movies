@@ -1,16 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import css from './HomeMovieList.module.css';
 
 const HomeMovieList = ({ movies }) => {
+  const location = useLocation();
+
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=200x300';
   return (
     <ul className={css.movie_List}>
       {movies.map(({ id, title, vote_average, vote_count, poster_path }) => {
         return (
           <li key={id} className={css.movie_card}>
-            <Link to={`/movies/${id}`}>
+            <Link state={{ from: location }} to={`/movies/${id}`}>
               <img
-                src={`https://image.tmdb.org/t/p/w200${poster_path}`}
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w200${poster_path}`
+                    : defaultImg
+                }
                 alt=""
                 className={css.imageHome}
               />

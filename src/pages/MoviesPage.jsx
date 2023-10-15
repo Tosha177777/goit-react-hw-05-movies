@@ -1,31 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as SearchImg } from '../assets/images/search.svg';
 import { useSearchParams } from 'react-router-dom';
 import fetchMovies from 'components/Service/api';
+import { ColorRing } from 'react-loader-spinner';
+import SearchMovie from 'components/SearchMovie/SearchMovie';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [movies, setMovies] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const query = searchParams.get('query');
 
-  // const [movie, setMovie] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  //   const [page, setPage] = useState(1);
   useEffect(() => {
     if (!query) return;
     const fetchAllMovies = async () => {
-      // setIsLoading(true);
+      setIsLoading(true);
       try {
-        const dataMovies = await fetchMovies(
-          `search/movie/?query=${query}&include_adult=false`
-        );
-        // const results = dataMovies.results;
-        // setMovie(dataMovies);
-        console.log(dataMovies);
+        const dataMovies = await fetchMovies(`search/movie?query=${query}`);
+        setMovies(dataMovies.results);
       } catch (error) {
         console.error(error);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     };
     fetchAllMovies();
@@ -38,19 +35,33 @@ const MoviesPage = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input type="text" name="searchMovieByName" required />
-      </label>
-      <button
-        type="submit"
-        style={{
-          display: `inline-block`,
-        }}
+    <>
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: `flex`, alignItems: `center` }}
       >
-        <SearchImg />
-      </button>
-    </form>
+        <label>
+          <input
+            type="text"
+            name="searchMovieByName"
+            required
+            style={{ height: `30px` }}
+          />
+        </label>
+        <button
+          type="submit"
+          style={{
+            display: `inline-block`,
+            backgroundColor: `inherit`,
+            border: `none`,
+          }}
+        >
+          <SearchImg />
+        </button>
+      </form>
+      {isLoading && <ColorRing visible={isLoading} />}
+      {movies && <SearchMovie movies={movies} />}
+    </>
   );
 };
 
