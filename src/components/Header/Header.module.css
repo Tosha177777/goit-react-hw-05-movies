@@ -1,0 +1,17 @@
+header {
+  margin-bottom: 15px;
+}
+
+.navLink {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid skyblue;
+  border-radius: 7px;
+  margin-right: 10px;
+  transition: all 0.3s;
+}
+
+.navLink:hover {
+  background-color: skyblue;
+  color: whitesmoke;
+}

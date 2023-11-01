@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import fetchMovies from 'components/Service/api';
 import { ColorRing } from 'react-loader-spinner';
 import SearchMovie from 'components/SearchMovie/SearchMovie';
+import { Input } from '@chakra-ui/react';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -41,12 +42,7 @@ const MoviesPage = () => {
         style={{ display: `flex`, alignItems: `center` }}
       >
         <label>
-          <input
-            type="text"
-            name="searchMovieByName"
-            required
-            style={{ height: `30px` }}
-          />
+          <Input type="text" name="searchMovieByName" required />
         </label>
         <button
           type="submit"
