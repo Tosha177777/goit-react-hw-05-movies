@@ -1,5 +1,6 @@
 import React from 'react';
 import css from './Cast.module.css';
+import { Card, CardBody, Heading, Image, Stack, Text } from '@chakra-ui/react';
 
 const CastComponent = ({ actors }) => {
   const defaultImg =
@@ -8,20 +9,39 @@ const CastComponent = ({ actors }) => {
     <ul className={css.movie_List}>
       {actors.map(({ id, character, name, popularity, profile_path }) => {
         return (
-          <li key={id} className={css.movie_card}>
-            <img
-              src={
-                profile_path
-                  ? `https://image.tmdb.org/t/p/w200${profile_path}`
-                  : defaultImg
-              }
-              alt=""
-            />
-            <div className={css.castBox}>
-              <h2 className={css.titleMain}>{character}</h2>
-              <p>Name: {name}</p>
-              <p>Popularity: {popularity}</p>
-            </div>
+          <li key={id}>
+            <Card maxW="200px" h={`359px`}>
+              <CardBody>
+                <Image
+                  h={`240px`}
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w200${profile_path}`
+                      : defaultImg
+                  }
+                  alt=""
+                  borderRadius="lg"
+                />
+                <Stack mt="8px" spacing="1.5px">
+                  <Heading
+                    fontSize={`16px`}
+                    textOverflow={`ellipsis`}
+                    overflow={`hidden`}
+                    whiteSpace={`nowrap`}
+                  >
+                    {character}
+                  </Heading>
+                  <Text
+                    textOverflow={`ellipsis`}
+                    overflow={`hidden`}
+                    whiteSpace={`nowrap`}
+                  >
+                    Name: {name}
+                  </Text>
+                  <Text>Popularity: {popularity}</Text>
+                </Stack>
+              </CardBody>
+            </Card>
           </li>
         );
       })}

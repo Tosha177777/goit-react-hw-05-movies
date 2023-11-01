@@ -1,5 +1,15 @@
 import React from 'react';
 import css from './Reviews.module.css';
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 const Reviews = ({ comments }) => {
   const defaultImg =
@@ -18,25 +28,43 @@ const Reviews = ({ comments }) => {
             }) => {
               return (
                 <li key={id}>
-                  <div>
-                    <img
+                  <Card
+                    direction={{ base: 'column', sm: 'row' }}
+                    overflow="hidden"
+                    variant="outline"
+                  >
+                    <Image
+                      objectFit="cover"
+                      maxW={{ base: '100%', sm: '200px' }}
                       src={
                         avatar_path
                           ? `https://image.tmdb.org/t/p/w200${avatar_path}`
                           : defaultImg
                       }
                       alt=""
-                      style={{
-                        borderRadius: `50%`,
-                        overflow: 'hidden',
-                      }}
                     />
-                  </div>
-                  <h2>{username}</h2>
-                  <p>{name}</p>
-                  <p>Created at: {created_at}</p>
-                  <p className={css.reviewsContent}>{content}</p>
-                  <p>Updated at: {updated_at}</p>
+
+                    <Stack>
+                      <CardBody>
+                        <CardHeader p={`0 0 0 20px`}>
+                          <Text py="2" fontStyle={`italic`}>
+                            Created at: {created_at}
+                          </Text>
+                        </CardHeader>
+                        <Heading size="md">{username}</Heading>
+                        <Text py="2">{name}</Text>
+                        <Text py="2" h={`150px`} overflowY={`scroll`}>
+                          {content}
+                        </Text>
+
+                        <CardFooter p={`0 0 0 20px`}>
+                          <Text py="2" fontStyle={`italic`}>
+                            Updated at: {updated_at}
+                          </Text>
+                        </CardFooter>
+                      </CardBody>
+                    </Stack>
+                  </Card>
                 </li>
               );
             }
