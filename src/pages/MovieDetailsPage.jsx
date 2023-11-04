@@ -1,3 +1,4 @@
+import { Container } from '@chakra-ui/react';
 import MovieDetails from 'components/MovieDetails/MovieDetails';
 import fetchMovies from 'components/Service/api';
 import React, { useEffect, useState } from 'react';
@@ -24,11 +25,13 @@ const MovieDetailsPage = () => {
   }, [movieId]);
 
   return (
-    <div>
-      {isLoading && <ColorRing visible={isLoading} />}
+    <section>
+      <Container margin={`0 auto`} maxW={`1440px`} p={`0 15px`}>
+        {isLoading && <ColorRing visible={isLoading} />}
 
-      {movie && <MovieDetails movie={movie} />}
-    </div>
+        {movie && <MovieDetails movie={movie} />}
+      </Container>
+    </section>
   );
 };
 

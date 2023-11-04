@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import fetchMovies from 'components/Service/api';
 import { ColorRing } from 'react-loader-spinner';
 import SearchMovie from 'components/SearchMovie/SearchMovie';
-import { Input } from '@chakra-ui/react';
+import { Container, Input } from '@chakra-ui/react';
 
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -36,28 +36,30 @@ const MoviesPage = () => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: `flex`, alignItems: `center` }}
-      >
-        <label>
-          <Input type="text" name="searchMovieByName" required />
-        </label>
-        <button
-          type="submit"
-          style={{
-            display: `inline-block`,
-            backgroundColor: `inherit`,
-            border: `none`,
-          }}
+    <section>
+      <Container margin={`0 auto`} maxW={`1440px`} p={`0 15px`}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: `flex`, alignItems: `center` }}
         >
-          <SearchImg />
-        </button>
-      </form>
-      {isLoading && <ColorRing visible={isLoading} />}
-      {movies && <SearchMovie movies={movies} />}
-    </>
+          <label>
+            <Input type="text" name="searchMovieByName" required />
+          </label>
+          <button
+            type="submit"
+            style={{
+              display: `inline-block`,
+              backgroundColor: `inherit`,
+              border: `none`,
+            }}
+          >
+            <SearchImg />
+          </button>
+        </form>
+        {isLoading && <ColorRing visible={isLoading} />}
+        {movies && <SearchMovie movies={movies} />}
+      </Container>
+    </section>
   );
 };
 

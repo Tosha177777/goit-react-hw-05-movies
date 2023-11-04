@@ -3,7 +3,7 @@ import { ReactComponent as BackBtn } from '../../assets/backbtn.svg';
 import css from './Details.module.css';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { ColorRing } from 'react-loader-spinner';
-import { Box, Container, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Container, HStack, Heading, Image, Text } from '@chakra-ui/react';
 const CastPage = lazy(() => import('pages/CastPage'));
 const ReviewsPage = lazy(() => import('pages/ReviewsPage'));
 
@@ -35,10 +35,10 @@ const MovieDetails = ({ movie }) => {
           {movie.overview}
         </Text>
         <div>
-          <div className={css.castAndReview}>
+          <HStack>
             <Link to={`cast`}>Cast</Link>
             <Link to={`reviews`}>Review</Link>
-          </div>
+          </HStack>
           <div>
             <Suspense fallback={<ColorRing visible={true} />}>
               <Container maxWidth={`1200px`}>

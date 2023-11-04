@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import fetchMovies from 'components/Service/api';
 import HomeMovieList from 'components/HomeMovieList/HomeMovieList';
+import { Container } from '@chakra-ui/react';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -19,9 +20,11 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
-      <HomeMovieList movies={movies} />
-    </div>
+    <section>
+      <Container margin={`0 auto`} maxW={`1440px`} p={`0 15px`}>
+        <HomeMovieList movies={movies} />
+      </Container>
+    </section>
   );
 };
 

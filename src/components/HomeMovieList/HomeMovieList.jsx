@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import css from './HomeMovieList.module.css';
-import { Card, CardBody, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import {
+  Card,
+  CardBody,
+  Heading,
+  Image,
+  List,
+  ListItem,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 const HomeMovieList = ({ movies }) => {
   const location = useLocation();
@@ -9,12 +17,18 @@ const HomeMovieList = ({ movies }) => {
   const defaultImg =
     'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=200x300';
   return (
-    <ul className={css.movie_List}>
+    <List
+      display={`flex`}
+      flexDirection={`row`}
+      flexWrap={`wrap`}
+      gap={`20px`}
+      justifyContent={`center`}
+    >
       {movies.map(({ id, title, vote_average, vote_count, poster_path }) => {
         return (
-          <li key={id}>
+          <ListItem key={id}>
             <Link state={{ from: location }} to={`/movies/${id}`}>
-              <Card maxW="200px" h={`359px`}>
+              <Card w="200px" h={`359px`}>
                 <CardBody>
                   <Image
                     h={`240px`}
@@ -41,10 +55,10 @@ const HomeMovieList = ({ movies }) => {
                 </CardBody>
               </Card>
             </Link>
-          </li>
+          </ListItem>
         );
       })}
-    </ul>
+    </List>
   );
 };
 
